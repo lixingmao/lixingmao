@@ -1,21 +1,23 @@
 nguage: node_js
 node_js: stable
 
-#before_install:
-#  - npm install -g hexo
-#  - npm install -g hexo-cli
-#
 # S: Build Lifecycle
-#install:
+
+install:
+
+#  - npm install -g hexo
+#  - npm install -g hexo-deploy-git
   - npm install
 
+before_script:
 
-#before_script:
-# - npm install -g gulp
+#  - npm install -g gulp
+#  - npm install -g hexo
+   
+  - hexo -v
 
 script:
-  - hexo clean
-  - hexo generate
+  - hexo g
 
 after_script:
   - cd ./public
@@ -23,16 +25,16 @@ after_script:
   - git config user.name "lixingmao"
   - git config user.email "847435683@qq.com"
   - git add .
-  - git commit -m "Update docs"
-  - git push --force --quiet "https://${TOKEN}@${GH_REF}" master:master
+  - git commit -m "Update blog!"
+  - git push --force --quiet "https://${TOKEN}@${GH_REF}" master:master	
+
+#GITHUB_TOKEN为在TravisCI中添加的来自Github的授权Token，见上一步
 
 branches:
   only:
     - blog-source
+
+# 创建全局变量，与GithubPage仓库ssh地址一致
 env:
  global:
    - GH_REF: github.com/lixingmao/lixingmao.github.io.git
-
-cache:
-  directories:
-    - node_modules
