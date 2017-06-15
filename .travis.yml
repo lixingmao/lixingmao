@@ -1,40 +1,70 @@
-nguage: node_js
-node_js: stable
+# nguage: node_js
+# node_js: stable
 
-# S: Build Lifecycle
+# # S: Build Lifecycle
 
-install:
+# install:
 
-#  - npm install -g hexo
-#  - npm install -g hexo-deploy-git
-  - npm install
+# #  - npm install -g hexo
+# #  - npm install -g hexo-deploy-git
+#   - npm install
+
+# before_script:
+
+# #  - npm install -g gulp
+# #  - npm install -g hexo
+   
+#   - hexo -v
+
+# script:
+#   - hexo g
+
+# after_script:
+#   - cd ./public
+#   - git init
+#   - git config user.name "lixingmao"
+#   - git config user.email "847435683@qq.com"
+#   - git add .
+#   - git commit -m "Update blog!"
+#   - git push --force --quiet "https://${TOKEN}@${GH_REF}" master:master	
+
+# #GITHUB_TOKEN为在TravisCI中添加的来自Github的授权Token，见上一步
+
+# branches:
+#   only:
+#     - blog-source
+
+# # 创建全局变量，与GithubPage仓库ssh地址一致
+# env:
+#  global:
+#    - GH_REF: github.com/lixingmao/lixingmao.github.io.git
+
+language: node_js
+branches:
+
+only:
+  - blog-source #源码分支名称
+
+before_install:
+  - npm install -g hexo
+  - npm install -g hexo-cli
 
 before_script:
+  - git config --global user.name 'lixingmao'
+  - git config --global user.email '847435683@qq.com'
+  - sed -i'' "s~git@github.com:lixingmao/lixingmao.github.io.git~https://${TOKEN}:x-oauth-basic@github.com/lixingmao/lixingmao.github.io.git~" _config.yml
 
-#  - npm install -g gulp
-#  - npm install -g hexo
-   
-  - hexo -v
+install:
+  - npm install
 
 script:
-  - hexo g
+  - hexo clean
+  - hexo generate
 
-after_script:
-  - cd ./public
-  - git init
-  - git config user.name "lixingmao"
-  - git config user.email "847435683@qq.com"
-  - git add .
-  - git commit -m "Update blog!"
-  - git push --force --quiet "https://${TOKEN}@${GH_REF}" master:master	
+after_success:
+  - hexo deploy
 
-#GITHUB_TOKEN为在TravisCI中添加的来自Github的授权Token，见上一步
-
-branches:
-  only:
-    - blog-source
-
-# 创建全局变量，与GithubPage仓库ssh地址一致
-env:
- global:
-   - GH_REF: github.com/lixingmao/lixingmao.github.io.git
+cache: 
+    directories"
+      - node_modules
+    
