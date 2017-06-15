@@ -1,25 +1,30 @@
 nguage: node_js
 node_js: stable
 
+before_install:
+  - npm install -g hexo
+  - npm install -g hexo-cli
+
 # S: Build Lifecycle
 install:
   - npm install
 
 
-#before_script:
+before_script:
  # - npm install -g gulp
 
 script:
-  - hexo g
+  - hexo clean
+  - hexo generate
 
 after_script:
   - cd ./public
   - git init
-  - git config user.name "lifengsofts"
-  - git config user.email "lifengsofts@gmail.com"
+  - git config user.name "lixingmao"
+  - git config user.email "847435683@qq.com"
   - git add .
   - git commit -m "Update docs"
-  - git push --force --quiet "https://${github blog}@${GH_REF}" master:master
+  - git push --force --quiet "https://${GH_REF}" master:master
 # E: Build LifeCycle
 
 branches:
@@ -27,6 +32,9 @@ branches:
     - blog-source
 env:
  global:
-   - GH_REF: github.com/lixingmao/lixingmao.github.io.git
+   - GH_REF: git@github.com:lixingmao/lixingmao.github.io.git
+#github.com/lixingmao/lixingmao.github.io.git
 
-
+cache:
+  directories:
+    - node_modules
