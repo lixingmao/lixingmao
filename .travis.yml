@@ -65,6 +65,6 @@ after_success:
   - hexo deploy
 
 cache: 
-    directories"
+    directories
       - node_modules
     
