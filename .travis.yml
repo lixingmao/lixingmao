@@ -47,7 +47,7 @@ only:
 
 before_install:
   - npm install -g hexo
-  - npm install -g hexo-cli
+  # - npm install -g hexo-cli
 
 before_script:
   - git config --global user.name 'lixingmao'
