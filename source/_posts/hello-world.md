@@ -38,3 +38,14 @@ $ hexo deploy
 ```
 
 More info: [Deployment](https://hexo.io/docs/deployment.html)
+
+### 测试列表
+- [ ] 测试待办事项
+- [ ] 这次呢
+- [x] 生效吗? 
+- [ ] 为啥都不起作用呢
+
+- [ ] 好吧, 貌似生效了
+- [x] 对了吗? 这才是好孩子
+
+
